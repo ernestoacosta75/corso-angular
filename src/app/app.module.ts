@@ -1,13 +1,19 @@
+// Modules
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
-import { AppComponent } from './app.component';
+import {HttpClientModule} from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CourseCardComponent } from './course-card/course-card.component';
-import { CourseImageComponent } from './course-image/course-image.component';
+
 import { HighlightedDirective } from './directives/highlighted.directive';
 import { NgxUnlessDirective } from './directives/ngx-unless.directive';
-import {HttpClientModule} from '@angular/common/http';
+
+// Components
+import { AppComponent } from './app.component';
+import { CourseCardComponent } from './course-card/course-card.component';
+import { CourseImageComponent } from './course-image/course-image.component';
+
+// Services
+import { CoursesService } from './services/courses.service';
 
 @NgModule({
   declarations: [
@@ -18,11 +24,13 @@ import {HttpClientModule} from '@angular/common/http';
     NgxUnlessDirective
   ],
   imports: [
-    BrowserModule,
+  BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    CoursesService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
