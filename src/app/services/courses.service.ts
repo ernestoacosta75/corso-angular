@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Course } from '../model/course';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root' // With this, only one instance is shared for all the components (singleton)
@@ -15,5 +16,12 @@ export class CoursesService {
     .set('pageSize', '10');
 
     return this.http.get<Course[]>('/api/courses', {params});
+  }
+
+  saveCourse(course: Course): Observable<Course> {
+    const headers = new HttpHeaders()
+    .set('X-Auth', 'userId');
+
+    return this.http.put<Course>(`/api/courses/${course.id}`, course, {headers});
   }
 }

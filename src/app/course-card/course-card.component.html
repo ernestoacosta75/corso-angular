@@ -8,7 +8,10 @@
               *ngIf="course.iconUrl"></ng-content>
 
   <div class="course-description">
-
+    <!-- Using the character # we create a template reference variable.
+         This kind of variable provides direct access to an element from
+        within the template
+    -->
     Edit Title: <input #courseTitle [value]="course.description">
 
   </div>
