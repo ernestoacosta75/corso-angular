@@ -14,8 +14,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 })
 export class AppComponent implements OnInit {
 
-
-  courses: Array<Course>;
+  courses$: Observable<Course[]>;
 
   constructor(private http: HttpClient) {
 
@@ -24,13 +23,10 @@ export class AppComponent implements OnInit {
   // To put some initialization logic, like triggering HTTP calls to the backend
   ngOnInit() {
     const params = new HttpParams()
-    .set("page", "1")
-    .set("pageSize", "10");
+    .set('page', '1')
+    .set('pageSize', '10');
 
-    this.http.get('/api/courses', {params}).pipe(
-      tap(val => console.log('http 0: ', val)),
-      map((val: Array<Course>) => val)
-    ).subscribe( val => this.courses = val);
+    this.courses$ = this.http.get<Course[]>('/api/courses', {params});
   }
 
 
